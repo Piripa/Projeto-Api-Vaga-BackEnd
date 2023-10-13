@@ -1,6 +1,10 @@
 package domain.user;
 
 import java.math.BigDecimal;
+
+import org.hibernate.dialect.Database;
+
+import dtos.UserDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,6 +49,16 @@ public class User {
 	
 	@Enumerated(EnumType.STRING) // os valores representam algum valor daquela string
 	private TipoUsuario tipo;
+
+
+	public User(UserDTO data) {
+		this.primeiroNome = data.primeiroNome();
+		this.segundoNome = data.segundoNome();
+		this.valor = data.valor();
+		this.tipo = data.tipo();
+		this.password = data.password();
+		this.email = data.email();
+	}
 
 
 	public Long getId() {

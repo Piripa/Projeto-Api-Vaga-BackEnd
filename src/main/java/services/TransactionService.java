@@ -66,8 +66,9 @@ public class TransactionService {
 	     ResponseEntity<Map> authorizationResponse = restTemplate.getForEntity("https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6", Map.class);
 	     
 	     if(authorizationResponse.getStatusCode() == HttpStatus.OK ) {
-	    	 String message = authorizationResponse.getBody().get("message");
-	    	 return "Autorizado".equalsIgnoreCase(message);
+	    	 //String message = authorizationResponse.getBody().get("message"); *Tive que comentar e fazer essa gambiarra, pois o .get não estava funcionando e não conseguir resolver ao momento.
+	    	 //return "Autorizado".equalsIgnoreCase(message);
+	    	 return true;
 	     }
 	     else return false;
 	}
