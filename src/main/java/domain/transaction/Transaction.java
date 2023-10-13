@@ -42,6 +42,46 @@ public class Transaction {
 	private User destinatario;
 	
 	private LocalDateTime time;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public User getRemetente() {
+		return remetente;
+	}
+
+	public void setRemetente(User remetente) {
+		this.remetente = remetente;
+	}
+
+	public User getDestinatario() {
+		return destinatario;
+	}
+
+	public void setDestinatario(User destinatario) {
+		this.destinatario = destinatario;
+	}
+
+	public LocalDateTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDateTime time) {
+		this.time = time;
+	}
 	
 	
 	

@@ -52,6 +52,46 @@ public class User {
 	}
 
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public void setPrimeiroNome(String primeiroNome) {
+		this.primeiroNome = primeiroNome;
+	}
+
+
+	public void setSegundoNome(String segundoNome) {
+		this.segundoNome = segundoNome;
+	}
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+
+	public void setTipo(TipoUsuario tipo) {
+		this.tipo = tipo;
+	}
+
+
 	public String getPrimeiroNome() {
 		return primeiroNome;
 	}
