@@ -45,4 +45,44 @@ public class User {
 	
 	@Enumerated(EnumType.STRING) // os valores representam algum valor daquela string
 	private TipoUsuario tipo;
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public String getPrimeiroNome() {
+		return primeiroNome;
+	}
+
+
+	public String getSegundoNome() {
+		return segundoNome;
+	}
+
+
+	public String getCpf() {
+		return cpf;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+
+	public TipoUsuario getTipo() {
+		return tipo;
+	}
 }
