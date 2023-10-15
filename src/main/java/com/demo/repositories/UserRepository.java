@@ -1,10 +1,10 @@
-package repositories;
+package com.demo.repositories;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import domain.user.User;
+import com.demo.domain.user.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	

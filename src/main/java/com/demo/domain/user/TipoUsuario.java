@@ -1,4 +1,4 @@
-package domain.user;
+package com.demo.domain.user;
 
 public enum TipoUsuario {
 	COMUNS,

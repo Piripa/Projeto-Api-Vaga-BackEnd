@@ -1,10 +1,11 @@
-package domain.user;
+package com.demo.domain.user;
 
 import java.math.BigDecimal;
 
 import org.hibernate.dialect.Database;
 
-import dtos.UserDTO;
+import com.demo.dtos.UserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,6 +28,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id") //chave primária
 public class User {
+	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +63,7 @@ public class User {
 		this.tipo = data.tipo();
 		this.password = data.password();
 		this.email = data.email();
+		this.cpf = data.cpf();
 	}
 
 

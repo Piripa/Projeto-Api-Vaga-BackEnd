@@ -1,4 +1,4 @@
-package services;
+package com.demo.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
-import domain.transaction.Transaction;
-import domain.user.User;
-import dtos.TransactionDTO;
-import repositories.TransactionRepository;
+import com.demo.domain.transaction.Transaction;
+import com.demo.domain.user.User;
+import com.demo.dtos.TransactionDTO;
+import com.demo.repositories.TransactionRepository;
 
 @Service
 public class TransactionService {
@@ -30,47 +30,55 @@ public class TransactionService {
 	@Autowired
 	private RestTemplate restTemplate; //Spring disponbiliza para realizar comunicações HTTP
 	
-	public void criarTransaction(TransactionDTO transaction) throws Exception {
+	@Autowired
+	private NotificationService notificationService;
+	
+	public Transaction criarTransaction(TransactionDTO transacao) throws Exception {
 		
-		User rementente = this.userService.findUserById(transaction.rementeteId());
+		User remetente = this.userService.findUserById(transacao.remetenteId());
 		
-		User destinatario = this.userService.findUserById(transaction.destinatarioId());
+		User destinatario = this.userService.findUserById(transacao.destinatarioId());
 		
-		userService.validateTransaction(rementente,transaction.valor());
+		userService.validateTransaction(remetente,transacao.valor());
 		
-		boolean estaAutorizado = this.authorizeTransaction(rementente, transaction.valor());
+		boolean estaAutorizado = this.authorizeTransaction(remetente, transacao.valor());
 		
 		if(!estaAutorizado) {
 			throw new Exception("Transacao não autorizada");
 		}
 		
 		Transaction newTransaction = new Transaction();
-		newTransaction.setAmount(transaction.valor());
-		newTransaction.setRemetente(rementente);
+		newTransaction.setValor(transacao.valor());
+		newTransaction.setRemetente(remetente);
 		newTransaction.setDestinatario(destinatario);
 		newTransaction.setTime(LocalDateTime.now());
 		
-		rementente.setValor(rementente.getValor().subtract(transaction.valor()));
-		destinatario.setValor(destinatario.getValor().add(transaction.valor()));
+		remetente.setValor(remetente.getValor().subtract(transacao.valor()));
+		destinatario.setValor(destinatario.getValor().add(transacao.valor()));
 		
 		this.transactionRepository.save(newTransaction);
-		this.userService.saveUser(rementente);
+		this.userService.saveUser(remetente);
 		this.userService.saveUser(destinatario);
 
+		this.notificationService.enviarNotificacao(remetente, "Transação enviada com sucesso!!");
 		
+		this.notificationService.enviarNotificacao(destinatario, "Transação recebida com sucesso!!");
+
+		
+		return newTransaction;
 		
 		
 	}
 	
 	public boolean authorizeTransaction(User rementente, BigDecimal value) {
-	     ResponseEntity<Map> authorizationResponse = restTemplate.getForEntity("https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6", Map.class);
+	     //ResponseEntity<Map> authorizationResponse = restTemplate.getForEntity("https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6", Map.class);
 	     
-	     if(authorizationResponse.getStatusCode() == HttpStatus.OK ) {
+	     //if(authorizationResponse.getStatusCode() == HttpStatus.OK ) {
 	    	 //String message = authorizationResponse.getBody().get("message"); *Tive que comentar e fazer essa gambiarra, pois o .get não estava funcionando e não conseguir resolver ao momento.
 	    	 //return "Autorizado".equalsIgnoreCase(message);
 	    	 return true;
-	     }
-	     else return false;
+	    // }
+	    // else return false;
 	}
 
 }

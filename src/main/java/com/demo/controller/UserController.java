@@ -1,4 +1,4 @@
-package controller;
+package com.demo.controller;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import domain.user.User;
-import dtos.UserDTO;
-import services.UserService;
+import com.demo.domain.user.User;
+import com.demo.dtos.UserDTO;
+import com.demo.services.UserService;
 
 @RestController
 @RequestMapping("/users")

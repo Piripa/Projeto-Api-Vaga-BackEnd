@@ -1,4 +1,4 @@
-package services;
+package com.demo.services;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import domain.user.TipoUsuario;
-import domain.user.User;
-import dtos.UserDTO;
-import repositories.UserRepository;
+import com.demo.domain.user.TipoUsuario;
+import com.demo.domain.user.User;
+import com.demo.dtos.UserDTO;
+import com.demo.repositories.UserRepository;
 
 @Service
 public class UserService {

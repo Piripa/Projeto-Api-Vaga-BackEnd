@@ -1,9 +1,10 @@
-package domain.transaction;
+package com.demo.domain.transaction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import domain.user.User;
+import com.demo.domain.user.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,12 +26,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Transaction {
+	
+	public Transaction() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private BigDecimal amount;
+	private BigDecimal valor;
 	
 	
 	@ManyToOne //Um usuario pode fazer varias transações, mas uma transação só envolve um usuario;
@@ -51,12 +56,12 @@ public class Transaction {
 		this.id = id;
 	}
 
-	public BigDecimal getAmount() {
-		return amount;
+	public BigDecimal getValor() {
+		return valor;
 	}
 
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
 	}
 
 	public User getRemetente() {
